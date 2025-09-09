@@ -1,4 +1,5 @@
-name: cap-aws-docker
+version: "3.9"
+# name: cap-aws-docker
 
 # Docker Compose configuration for Cap using AWS RDS and S3
 # Environment variables are loaded from .env file in the same directory
