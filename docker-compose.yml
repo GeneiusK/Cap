@@ -30,4 +30,4 @@ services:
       CAP_AWS_REGION: ${CAP_AWS_REGION}
 
     ports:
-      - 8001:8001
+      - 8001:3000
