@@ -1,0 +1,32 @@
+name: cap-aws-docker
+
+# Docker Compose configuration for Cap using AWS RDS and S3
+# Environment variables are loaded from .env file in the same directory
+
+services:
+  cap-web:
+    container_name: cap-web
+    image: ghcr.io/capsoftware/cap-web:latest
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # Database URL constructed from environment variables
+      DATABASE_URL: mysql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
+
+      # Application URLs
+      WEB_URL: ${WEB_URL}
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+
+      # Security Keys
+      DATABASE_ENCRYPTION_KEY: ${DATABASE_ENCRYPTION_KEY}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+
+      # AWS S3 Configuration
+      CAP_AWS_ACCESS_KEY: ${CAP_AWS_ACCESS_KEY}
+      CAP_AWS_SECRET_KEY: ${CAP_AWS_SECRET_KEY}
+      CAP_AWS_BUCKET: ${CAP_AWS_BUCKET}
+      CAP_AWS_REGION: ${CAP_AWS_REGION}
+
+    ports:
+      - 8001:8001
